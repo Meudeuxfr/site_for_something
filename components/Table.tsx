@@ -1,11 +1,34 @@
 import React from 'react';
 
-const Table = ({ table, onReserve }) => {
-    return (
-        <div className={`table ${table.reserved ? 'reserved' : ''}`} onClick={() => !table.reserved && onReserve(table.id)}>
-            Table {table.id}
-        </div>
-    );
+type TableProps = {
+  table: {
+    id: number;
+    reserved: boolean;
+  };
+  onReserve: (id: number) => void;
 };
 
-export default Table;
+export default function Table({ table, onReserve }: TableProps) {
+  return (
+    <div
+      style={{
+        padding: '1rem',
+        marginBottom: '1rem',
+        border: '1px solid #ccc',
+        borderRadius: 8,
+        background: table.reserved ? '#ffe6e6' : '#e6ffe6',
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        maxWidth: 400,
+      }}
+    >
+      <span>Table #{table.id}</span>
+      {table.reserved ? (
+        <span style={{ color: 'red' }}>Reserved</span>
+      ) : (
+        <button onClick={() => onReserve(table.id)}>Reserve</button>
+      )}
+    </div>
+  );
+}
