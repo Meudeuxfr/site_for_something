@@ -1,14 +1,22 @@
-export default function Header() {
-    return (
-      <header style={{ backgroundColor: '#1a1a1a', padding: '20px 0', color: '#fff' }}>
-        <div className="container" style={{ display: 'flex', justifyContent: 'space-between' }}>
-          <h1 style={{ fontSize: '1.5rem' }}>Restaurant</h1>
-          <nav>
-            <a href="/" style={{ marginRight: 20 }}>Home</a>
-            <a href="/menu" style={{ marginRight: 20 }}>Menu</a>
-            <a href="/contact">Contact</a>
-          </nav>
+import React from 'react';
+
+const Header = () => {
+  return (
+    <header className="bg-white shadow-lg py-4">
+      <div className="container mx-auto flex justify-between items-center">
+        <div className="text-2xl font-bold text-blue-600">
+          <a href="/">My Restaurant</a>
         </div>
-      </header>
-    );
-  }
+        <nav>
+          <ul className="flex space-x-6">
+            <li><a href="#about" className="text-gray-600 hover:text-blue-600">About</a></li>
+            <li><a href="#services" className="text-gray-600 hover:text-blue-600">Services</a></li>
+            <li><a href="#contact" className="text-gray-600 hover:text-blue-600">Contact</a></li>
+          </ul>
+        </nav>
+      </div>
+    </header>
+  );
+};
+
+export default Header;
