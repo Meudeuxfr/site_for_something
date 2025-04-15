@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import { supabase } from '../lib/supabase';
 import Table from '../components/Table';
+import Header from '../components/Header';
+import Hero from '../components/Hero';
 
 type TableType = {
   id: number;
@@ -12,7 +14,7 @@ export default function Home() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
-  const restaurantId = 1; // You can make this dynamic later
+  const restaurantId = 1;
 
   const fetchTables = async () => {
     setLoading(true);
@@ -52,17 +54,22 @@ export default function Home() {
     }
   };
 
-  if (loading) return <p>Loading tables...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <p className="text-center text-xl">Loading tables...</p>;
+  if (error) return <p className="text-center text-red-500">{`Error: ${error}`}</p>;
 
   return (
-    <div style={{ padding: '2rem' }}>
-      <h1>Reserve a Table</h1>
-      <div>
-        {tables.map((table) => (
-          <Table key={table.id} table={table} onReserve={reserveTable} />
-        ))}
-      </div>
+    <div className="p-6">
+      <Header />
+      <Hero />
+      
+      <main className="container mt-20">
+        <h1 className="text-3xl font-semibold text-center mb-6">Reserve a Table</h1>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+          {tables.map((table) => (
+            <Table key={table.id} table={table} onReserve={reserveTable} />
+          ))}
+        </div>
+      </main>
     </div>
   );
 }
