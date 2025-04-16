@@ -1,20 +1,24 @@
+'use client';
 import React from 'react';
+import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { i18n } = useTranslation();
+
+  const toggleDarkMode = () => {
+    document.documentElement.classList.toggle('dark');
+  };
+
   return (
-    <header className="bg-white shadow-lg py-4">
-      <div className="container mx-auto flex justify-between items-center">
-        <div className="text-2xl font-bold text-blue-600">
-          <a href="/">My Restaurant</a>
-        </div>
-        <nav>
-          <ul className="flex space-x-6">
-            <li><a href="#about" className="text-gray-600 hover:text-blue-600">About</a></li>
-            <li><a href="#services" className="text-gray-600 hover:text-blue-600">Services</a></li>
-            <li><a href="#contact" className="text-gray-600 hover:text-blue-600">Contact</a></li>
-          </ul>
-        </nav>
-      </div>
+    <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-900">
+      <h1 className="text-xl font-bold dark:text-white">My Restaurant</h1>
+      <nav className="flex gap-4">
+        <button onClick={toggleDarkMode} className="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
+          🌙 Toggle Dark
+        </button>
+        <button onClick={() => i18n.changeLanguage('en')}>EN</button>
+        <button onClick={() => i18n.changeLanguage('pt')}>PT</button>
+      </nav>
     </header>
   );
 };
