@@ -1,23 +1,38 @@
 'use client';
-import React from 'react';
+import React, { useContext } from 'react';
+import { ThemeContext } from '../context/ThemeContext';
 import { useTranslation } from 'react-i18next';
 
 const Header = () => {
+  const { theme, toggleTheme } = useContext(ThemeContext);
   const { i18n } = useTranslation();
-
-  const toggleDarkMode = () => {
-    document.documentElement.classList.toggle('dark');
-  };
 
   return (
     <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-900">
       <h1 className="text-xl font-bold dark:text-white">My Restaurant</h1>
-      <nav className="flex gap-4">
-        <button onClick={toggleDarkMode} className="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
-          🌙 Toggle Dark
+
+      <nav className="flex gap-4 items-center">
+        {/* Dark Mode Toggle */}
+        <button
+          onClick={toggleTheme}
+          className="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
+        >
+          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
         </button>
-        <button onClick={() => i18n.changeLanguage('en')}>EN</button>
-        <button onClick={() => i18n.changeLanguage('pt')}>PT</button>
+
+        {/* Language Switch */}
+        <button
+          onClick={() => i18n.changeLanguage('en')}
+          className="text-sm px-2 py-1 rounded border dark:text-white"
+        >
+          EN
+        </button>
+        <button
+          onClick={() => i18n.changeLanguage('pt')}
+          className="text-sm px-2 py-1 rounded border dark:text-white"
+        >
+          PT
+        </button>
       </nav>
     </header>
   );
