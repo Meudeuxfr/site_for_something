@@ -4,6 +4,7 @@ import Table from '../components/Table';
 import Header from '../components/Header';
 import Hero from '../components/Hero';
 
+// Define the shape of a table record
 type TableType = {
   id: number;
   reserved: boolean;
@@ -16,6 +17,7 @@ export default function Home() {
 
   const restaurantId = 1;
 
+  // Fetch tables from Supabase
   const fetchTables = async () => {
     setLoading(true);
     const { data, error } = await supabase
@@ -35,6 +37,7 @@ export default function Home() {
     fetchTables();
   }, []);
 
+  // Handle table reservation
   const reserveTable = async (tableId: number) => {
     const user = await supabase.auth.getUser();
     const user_id = user.data.user?.id ?? null;
@@ -42,7 +45,7 @@ export default function Home() {
     const { error } = await supabase.from('reservations').insert([
       {
         table_id: tableId,
-        user_id, // This can be null if you're testing without auth
+        user_id,
       },
     ]);
 
@@ -50,7 +53,7 @@ export default function Home() {
       alert('Failed to reserve table: ' + error.message);
     } else {
       alert('Table reserved!');
-      await fetchTables(); // Refresh table list
+      await fetchTables();
     }
   };
 
@@ -58,12 +61,12 @@ export default function Home() {
   if (error) return <p className="text-center text-red-500">{`Error: ${error}`}</p>;
 
   return (
-    <div className="p-6">
+    <div className="bg-gray-50">
       <Header />
       <Hero />
-      
-      <main className="container mt-20">
-        <h1 className="text-3xl font-semibold text-center mb-6">Reserve a Table</h1>
+
+      <main id="reserve" className="container mx-auto px-4 mt-24 mb-16">
+        <h2 className="text-4xl font-bold text-center mb-10">Reserve a Table</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {tables.map((table) => (
             <Table key={table.id} table={table} onReserve={reserveTable} />
