@@ -1,53 +1,57 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import { useRouter } from 'next/router';
-import React from 'react';
+import { supabase } from '../../lib/supabase';
 
-const LoginPage = () => {
+export default function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [message, setMessage] = useState('');
+  const [error, setError] = useState<string | null>(null);
   const router = useRouter();
 
   const handleLogin = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    const res = await fetch('/api/auth/login', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email, password }),
+    const { error } = await supabase.auth.signInWithPassword({
+      email,
+      password,
     });
 
-    const data = await res.json();
-
-    if (data.message === 'Login successful') {
-      // Redirect to the dashboard or home page
-      router.push('/');
+    if (error) {
+      setError(error.message);
     } else {
-      setMessage(data.message);
+      router.push('/');
     }
   };
 
   return (
-    <div>
-      <h2>Login</h2>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-        <button type="submit">Login</button>
-      </form>
-      {message && <p>{message}</p>}
+    <div className="flex min-h-screen items-center justify-center bg-gray-100 dark:bg-black p-4">
+      <div className="bg-white dark:bg-gray-900 shadow-lg rounded-lg p-8 w-full max-w-md">
+        <h1 className="text-2xl font-bold mb-6 text-center">Login</h1>
+        <form onSubmit={handleLogin} className="space-y-4">
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-800 border dark:border-gray-700"
+            required
+          />
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            className="w-full px-4 py-2 rounded bg-gray-100 dark:bg-gray-800 border dark:border-gray-700"
+            required
+          />
+          {error && <p className="text-red-500 text-sm">{error}</p>}
+          <button
+            type="submit"
+            className="w-full py-2 px-4 bg-primary text-white font-semibold rounded hover:bg-blue-700 transition"
+          >
+            Sign In
+          </button>
+        </form>
+      </div>
     </div>
   );
-};
-
-export default LoginPage;
+}
