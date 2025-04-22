@@ -15,22 +15,19 @@ const Header = () => {
         {/* Dark Mode Toggle */}
         <button
           onClick={toggleTheme}
-          className="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white"
-        >
+          className="text-sm px-3 py-1 rounded bg-gray-200 dark:bg-gray-700 text-black dark:text-white">
           {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
         </button>
 
         {/* Language Switch */}
         <button
           onClick={() => i18n.changeLanguage('en')}
-          className="text-sm px-2 py-1 rounded border dark:text-white"
-        >
+          className="text-sm px-2 py-1 rounded border dark:text-white">
           EN
         </button>
         <button
           onClick={() => i18n.changeLanguage('pt')}
-          className="text-sm px-2 py-1 rounded border dark:text-white"
-        >
+          className="text-sm px-2 py-1 rounded border dark:text-white">
           PT
         </button>
       </nav>
