@@ -1,36 +1,46 @@
-import React, { useContext } from 'react';
-import { useRouter } from 'next/router';
-import { ThemeContext } from '../context/ThemeContext';
-import { useTranslation } from 'react-i18next';
+import { useTheme } from '../context/ThemeContext'
+import { useTranslation } from 'next-i18next'
+import { useRouter } from 'next/router'
+import Link from 'next/link'
 
-const Navbar = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { i18n } = useTranslation();
-  const router = useRouter();
+export default function Navbar() {
+  const { theme, toggleTheme } = useTheme()
+  const { t } = useTranslation()
+  const router = useRouter()
+  const { locale } = router
 
-  const toggleLanguage = () => {
-    i18n.changeLanguage(i18n.language === 'en' ? 'pt' : 'en');
-  };
+  const changeLanguage = (lang: string) => {
+    router.push(router.pathname, router.asPath, { locale: lang })
+  }
 
   return (
-    <nav className="fixed top-0 w-full flex justify-between items-center px-6 py-4 bg-white/70 dark:bg-black/70 backdrop-blur z-50">
-      <h1 className="text-xl font-bold">🍽 My Restaurant</h1>
-      <div className="flex gap-4">
-        <button onClick={toggleTheme} className="px-3 py-1 border rounded">
-          {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
-        </button>
-        <button onClick={toggleLanguage} className="px-3 py-1 border rounded">
-          🌐 {i18n.language.toUpperCase()}
-        </button>
+    <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md">
+      <h1 className="text-xl font-bold dark:text-white">🍽️ My Restaurant</h1>
+
+      <div className="flex items-center gap-4">
+        {/* Theme Toggle */}
         <button
-          onClick={() => router.push('/auth/login')}
-          className="px-4 py-2 bg-primary text-white rounded hover:bg-blue-700 transition"
+          onClick={toggleTheme}
+          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
         >
-          Login
+          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
         </button>
+
+        {/* Language Switch */}
+        <button
+          onClick={() => changeLanguage(locale === 'en' ? 'pt' : 'en')}
+          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+        >
+          {locale === 'en' ? 'PT' : 'EN'}
+        </button>
+
+        {/* Login Link */}
+        <Link href="/login">
+          <button className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600">
+            Login
+          </button>
+        </Link>
       </div>
     </nav>
-  );
-};
-
-export default Navbar;
+  )
+}
