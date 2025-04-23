@@ -1,7 +1,7 @@
+import Link from 'next/link'
 import { useTheme } from '../context/ThemeContext'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
-import Link from 'next/link'
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme()
@@ -15,13 +15,15 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md">
-      <h1 className="text-xl font-bold dark:text-white">🍽️ My Restaurant</h1>
+      <Link href="/" className="text-xl font-bold dark:text-white">
+        🍽️ My Restaurant
+      </Link>
 
       <div className="flex items-center gap-4">
         {/* Theme Toggle */}
         <button
           onClick={toggleTheme}
-          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
         >
           {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
         </button>
@@ -29,15 +31,22 @@ export default function Navbar() {
         {/* Language Switch */}
         <button
           onClick={() => changeLanguage(locale === 'en' ? 'pt' : 'en')}
-          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600"
+          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
         >
           {locale === 'en' ? 'PT' : 'EN'}
         </button>
 
         {/* Login Link */}
-        <Link href="/login">
-          <button className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600">
-            Login
+        <Link href="/auth/login">
+          <button className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 transition">
+            {t('login') /* make sure you have a "login" key in your locale files */}
+          </button>
+        </Link>
+
+        {/* (Optional) Register Link */}
+        <Link href="/auth/register">
+          <button className="px-3 py-1 rounded bg-yellow-500 text-white hover:bg-yellow-600 transition">
+            {t('register')}
           </button>
         </Link>
       </div>
