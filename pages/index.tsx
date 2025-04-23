@@ -59,7 +59,7 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-red-100 to-pink-200 text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-[url('/background.jpg')] bg-cover bg-center text-gray-900 dark:text-white">
       <Navbar />
       <Hero />
       <Features />
