@@ -58,10 +58,14 @@ export default function Home() {
     }
   };
 
+  const scrollToReserve = () => {
+    document.getElementById('reserve')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-red-100 to-pink-200 text-gray-900 dark:text-white">
       <Navbar />
-      <Hero />
+      <Hero onBookNow={scrollToReserve} />
       <Features />
       <AboutUs />
 
