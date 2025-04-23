@@ -1,12 +1,10 @@
-// pages/_app.tsx
 import { AppProps } from 'next/app';
 import '../styles/globals.css';
 import React from 'react';
 import { ThemeProvider, useTheme } from '../context/ThemeContext';
 import { appWithTranslation } from 'next-i18next';
 import '../i18n';
-import { useEffect } from 'react'
-import '@/styles/globals.css';
+import { useEffect } from 'react';
 
 function ContentWrapper({ Component, pageProps }: AppProps) {
   const { theme } = useTheme();
