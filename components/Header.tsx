@@ -1,11 +1,12 @@
-'use client';
-import React, { useContext } from 'react';
-import { ThemeContext } from '../context/ThemeContext';
-import { useTranslation } from 'react-i18next';
+import React from 'react'
+import { useTheme } from '../context/ThemeContext'
+import { useTranslation } from 'next-i18next'
+import LocaleSwitcher from './LocaleSwitcher'
 
 const Header = () => {
-  const { theme, toggleTheme } = useContext(ThemeContext);
-  const { i18n } = useTranslation();
+  const { theme, toggleTheme } = useTheme()
+  const { i18n, t } = useTranslation('common')
+
 
   return (
     <header className="flex justify-between items-center p-4 bg-white dark:bg-gray-900">
