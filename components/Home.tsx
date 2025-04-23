@@ -6,7 +6,6 @@ import Hero from '../components/Hero';
 import Features from '../components/Features';
 import AboutUs from '../components/AboutUs';
 import Footer from '../components/footer';
-import { motion } from 'framer-motion';
 
 export default function Home() {
   const [tables, setTables] = useState([]);
@@ -60,29 +59,13 @@ export default function Home() {
   };
 
   return (
-    <div className="min-h-screen bg-[url('/background.jpg')] bg-cover bg-center text-gray-900 dark:text-white">
+    <div className="min-h-screen bg-gradient-to-br from-yellow-100 via-red-100 to-pink-200 text-gray-900 dark:text-white">
       <Navbar />
       <Hero />
+      <Features />
+      <AboutUs />
 
-      <motion.section
-        className="py-20 bg-white dark:bg-gray-900"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-      >
-        <Features />
-      </motion.section>
-
-      <motion.section
-        className="py-20 bg-gray-100 dark:bg-gray-800"
-        initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-      >
-        <AboutUs />
-      </motion.section>
-
-      <main id="reserve" className="container mx-auto py-20 px-4 bg-white dark:bg-gray-900">
+      <main id="reserve" className="container mx-auto mt-20 px-4">
         <h1 className="text-3xl font-semibold text-center mb-6">Reserve a Table</h1>
 
         {loading ? (
@@ -97,7 +80,6 @@ export default function Home() {
           </div>
         )}
       </main>
-
       <Footer />
     </div>
   );
