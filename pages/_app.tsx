@@ -5,6 +5,7 @@ import { ThemeProvider, useTheme } from '../context/ThemeContext'
 import { appWithTranslation } from 'next-i18next'
 import nextI18NextConfig from '../next-i18next.config.js'
 
+
 function ContentWrapper({ Component, pageProps }: AppProps) {
   const { theme } = useTheme()
 
