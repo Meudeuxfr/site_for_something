@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { useTheme } from '../context/ThemeContext'
 import { useTranslation } from 'next-i18next'
 import { useRouter } from 'next/router'
+import LocaleSwitcher from './LocaleSwitcher';
 
 export default function Navbar() {
   const { theme, toggleTheme } = useTheme()
@@ -19,23 +20,8 @@ export default function Navbar() {
         🍽️ My Restaurant
       </Link>
 
-      <div className="flex items-center gap-4">
-        {/* Theme Toggle */}
-        <button
-          onClick={toggleTheme}
-          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
-        >
-          {theme === 'dark' ? '☀️ Light' : '🌙 Dark'}
-        </button>
-
         {/* Language Switch */}
-        <button
-          onClick={() => changeLanguage(locale === 'en' ? 'pt' : 'en')}
-          className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 transition"
-        >
-          {locale === 'en' ? 'PT' : 'EN'}
-        </button>
-
+      <LocaleSwitcher />
         {/* Login Link */}
         <Link href="/auth/login">
           <button className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 transition">
@@ -49,7 +35,6 @@ export default function Navbar() {
             {t('register')}
           </button>
         </Link>
-      </div>
     </nav>
   )
 }

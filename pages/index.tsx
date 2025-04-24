@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { supabase } from '../lib/supabase';
 import Table from '../components/Table';
 import Navbar from '../components/Navbar';
@@ -11,6 +11,8 @@ export default function Home() {
   const [tables, setTables] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
+  const reserveRef = useRef<HTMLElement>(null);
+
 
   const fetchTables = async () => {
     setLoading(true);
@@ -22,6 +24,12 @@ export default function Home() {
     if (error) setError(error.message);
     else setTables(data || []);
     setLoading(false);
+  };
+  
+  const handleBookNow = () => {
+    if (reserveRef.current) {
+      reserveRef.current.scrollIntoView({ behavior: 'smooth' });
+    }
   };
 
   useEffect(() => {
@@ -61,11 +69,11 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-[url('./background.jpg')] bg-cover bg-center text-gray-900 dark:text-white">
       <Navbar />
-      <Hero />
+      <Hero onBookNow={handleBookNow} />
       <Features />
       <AboutUs />
-
-      <main id="reserve" className="container mx-auto mt-20 px-4">
+      
+      <main id="reserve" ref={reserveRef} className="container mx-auto mt-20 px-4">
         <h1 className="text-3xl font-semibold text-center mb-6">Reserve a Table</h1>
 
         {loading ? (
