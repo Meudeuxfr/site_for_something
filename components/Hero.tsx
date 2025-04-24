@@ -24,12 +24,6 @@ const Hero: React.FC<HeroProps> = ({ onBookNow }) => {
         <p className="text-lg md:text-2xl mb-6 font-light dark:text-gray-300 text-black">
           {t('Reserve your table with ease')}
         </p>
-        <button
-          onClick={onBookNow}
-          className="bg-gradient-to-r from-blue-600 to-blue-500 hover:from-blue-700 hover:to-blue-600 px-6 py-3 rounded-full text-white transition shadow-lg"
-        >
-          {t('Book Now')}
-        </button>
       </motion.div>
     </section>
   );

@@ -16,12 +16,6 @@ export default function Navbar() {
 
   return (
     <nav className="flex items-center justify-between p-4 bg-white dark:bg-gray-800 shadow-md">
-      <Link href="/" className="text-xl font-bold dark:text-white">
-        🍽️ My Restaurant
-      </Link>
-
-        {/* Language Switch */}
-      <LocaleSwitcher />
         {/* Login Link */}
         <Link href="/auth/login">
           <button className="px-3 py-1 rounded bg-green-500 text-white hover:bg-green-600 transition">

@@ -7,18 +7,19 @@ export default function LocaleSwitcher() {
   return (
     <div className="flex gap-2">
       {locales?.map((loc) => (
-        <Link key={loc} href={asPath} locale={loc}>
-          <a
-            className={`px-2 py-1 rounded ${
-              loc === active
-                ? 'bg-blue-600 text-white'
-                : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
-            }`}
-          >
-            {loc.toUpperCase()}
-          </a>
+        <Link
+          key={loc}
+          href={asPath}
+          locale={loc}
+          className={`px-2 py-1 rounded ${
+            loc === active
+              ? 'bg-blue-600 text-white'
+              : 'bg-gray-200 text-gray-800 hover:bg-gray-300'
+          }`}
+        >
+          {loc.toUpperCase()}
         </Link>
       ))}
     </div>
-  );
+  )
 }
