@@ -6,6 +6,7 @@ import Hero from '../components/Hero';
 import Features from '../components/Features';
 import AboutUs from '../components/AboutUs';
 import Footer from '../components/footer';
+import { Analytics } from "@vercel/analytics/react"
 
 export default function Home() {
   const [tables, setTables] = useState([]);
@@ -87,6 +88,7 @@ export default function Home() {
             ))}
           </div>
         )}
+      <Analytics />
       </main>
       <Footer />
     </div>
