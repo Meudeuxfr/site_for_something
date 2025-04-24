@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import type { AppProps } from 'next/app'
+import { Analytics } from "@vercel/analytics/react"
 import React, { useEffect } from 'react'
 import { ThemeProvider, useTheme } from '../context/ThemeContext'
 import { appWithTranslation } from 'next-i18next'
