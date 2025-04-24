@@ -11,7 +11,7 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #333; /* Default text color */
-    background: url('/background.jpg') no-repeat center center fixed;
+    background: url('background.jpg') no-repeat center center fixed;
     background-size: cover;
 }
 
